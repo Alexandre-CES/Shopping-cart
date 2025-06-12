@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Product } from './Types/Product';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import * as Icon from 'react-bootstrap-icons';
 
 function App() {
   const [products,setProducts] = useState<Product[]>([]);
@@ -18,37 +20,32 @@ function App() {
 
   return (
     <main>
-
-
-      <ul>
-      {
-        /*   
-        products.map((product)=>{
-          return(
-            <li key={product.id}>
-              <div>
-                {product.id};
-              </div>
-              <div>
-                {product.price};
-              </div>
-              <div>
-                {product.description};
-              </div>
-              <div>
-                {product.category};
-              </div>
-              <div>
-                {product.image};
-              </div>
-            </li>
-          );
-        })
-        */ 
-      }
-      </ul>
+      <section className='container mt-5'>
+        <div className='row justify-content-center'>
+          {
+            products.map((product)=>{
+              return(
+                <div className='col-md-4 mb-4'>
+                  <div className='card'>
+                    <img src={product.image}/>
+                    <div className='card-body'>
+                      <h3 className='card-title'>{product.price}$</h3>
+                      <p className="card-text">{product.title}</p>
+                      <a href="#" className="card-link">More</a>
+                      <button className='btn btn-primary'><Icon.Cart2/></button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </section>
     </main>
   );
 }
-
+/*
+{product.id};
+{product.category};
+*/
 export default App;
