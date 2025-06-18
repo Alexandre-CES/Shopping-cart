@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../Types/Product';
 import * as Icon from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
 
 export default function Home(){
     const [products,setProducts] = useState<Product[]>([]);
@@ -31,7 +32,7 @@ export default function Home(){
                         <div className='card-body'>
                             <h3 className='card-title'>{product.price}$</h3>
                             <p className="card-text">{product.title}</p>
-                            <a href="#" className="card-link">More</a>
+                            <Link to={'/product/'+product.id} target='_blank' className="card-link">More</Link>
                             <button className='btn btn-primary'><Icon.Cart2/></button>
                         </div>
                     </div>
