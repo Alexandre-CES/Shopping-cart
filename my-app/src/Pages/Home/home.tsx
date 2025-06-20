@@ -20,28 +20,33 @@ export default function Home(){
     },[]);
 
   return (
-    <main>
-      <section className='container mt-5'>
-        <div className='row justify-content-center'>
-          {
-            products.map((product)=>{
-              return(
-                <div className='col-md-4 mb-4'>
-                    <div className='card'>
-                        <img src={product.image}/>
-                        <div className='card-body'>
-                            <h3 className='card-title'>{product.price}$</h3>
-                            <p className="card-text">{product.title}</p>
-                            <Link to={'/product/'+product.id} target='_blank' className="card-link">More</Link>
-                            <button className='btn btn-primary'><Icon.Cart2/></button>
-                        </div>
-                    </div>
-                </div>
-              );
-            })
-          }
-        </div>
-      </section>
-    </main>
+    <div className='container mt-5'>
+      <header>
+        <h1>Shopping Cart</h1>
+      </header>
+      <main>
+        <section className='container mt-5'>
+          <div className='row justify-content-center'>
+            {
+              products.map((product)=>{
+                return(
+                  <div className='col-md-4 mb-4'>
+                      <div className='card'>
+                          <img src={product.image}/>
+                          <div className='card-body'>
+                              <h3 className='card-title'>{product.price}$</h3>
+                              <p className="card-text">{product.title}</p>
+                              <Link to={'/product/'+product.id} target='_blank' className="card-link">More</Link>
+                              <button className='btn btn-primary'><Icon.Cart2/></button>
+                          </div>
+                      </div>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
