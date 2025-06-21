@@ -32,7 +32,9 @@ export default function Home(){
                 return(
                   <div className='col-md-4 mb-4'>
                       <div className='card'>
-                          <img src={product.image}/>
+                          
+                          <img className='img-fixed-size img-fluid w-100 img-thumbnail rounded' src={product.image}/>
+                          
                           <div className='card-body'>
                               <h3 className='card-title'>{product.price}$</h3>
                               <p className="card-text">{product.title}</p>

@@ -24,7 +24,7 @@ export default function ProductView(){
 
             <div className="row my-5 align-items-center">
                 <div className="col">
-                    <img className="img-fluid img-thumbnail rounded" src={product?.image}/>
+                    <img className="img-fixed-size img-fluid img-thumbnail rounded" src={product?.image}/>
                 </div>
                 <div className="col d-grid gap-2">
                     <h2>{product?.title}</h2>
