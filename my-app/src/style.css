@@ -7,3 +7,9 @@
 #product-main h3{
     font-size:4em;
 }
+
+.card-text {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+}

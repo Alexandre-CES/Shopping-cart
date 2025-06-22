@@ -38,8 +38,8 @@ export default function Home(){
                           <div className='card-body'>
                               <h3 className='card-title'>{product.price}$</h3>
                               <p className="card-text">{product.title}</p>
-                              <Link to={'/product/'+product.id} target='_blank' className="card-link">More</Link>
-                              <button className='btn btn-primary'><Icon.Cart2/></button>
+                              <Link to={'/product/'+product.id} target='_blank' className="card-link text-secondary">More</Link>
+                              <button className='btn btn-primary mx-2'><Icon.Cart2/></button>
                           </div>
                       </div>
                   </div>
