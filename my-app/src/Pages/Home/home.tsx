@@ -20,7 +20,16 @@ export default function Home(){
   },[]);
 
   function addToCart(product:Product):void{
-    localStorage.setItem(product?.id.toString(),JSON.stringify(product));
+    let list = localStorage.getItem('cart');
+    let cart: Product[] = [];
+
+    if (list != null){
+      cart = JSON.parse(list);
+    }
+    
+    cart.push(product);
+
+    localStorage.setItem('cart',JSON.stringify(cart));
   }
 
   return (
