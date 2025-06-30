@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Product } from '../../Types/Product';
 import * as Icon from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
@@ -33,9 +33,14 @@ export default function Home(){
   }
 
   return (
-    <div className='container mt-5'>
-      <header>
-        <h1>Shopping Cart</h1>
+    <div className='container'>
+      <header className='d-flex py-3'>
+        <div className='col justify-content-center'>
+          <h1>Shopping Cart <Icon.Cart2/></h1>
+        </div>
+        <div className='d-flex flex-row-reverse'>
+          <button className='btn btn-secondary'>Logout</button>
+        
       </header>
       <main>
         <section className='container mt-5'>
