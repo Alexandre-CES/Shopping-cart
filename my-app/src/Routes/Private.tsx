@@ -16,7 +16,7 @@ export default function Private({children}:PrivateProps): JSX.Element | null{
                     email: user.email
                 };
 
-                localStorage.setItem('@detail',JSON.stringify(userData));
+                localStorage.setItem('@detailUser',JSON.stringify(userData));
                 setLoading(false);
                 setSigned(true);
             }else{

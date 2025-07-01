@@ -1,22 +1,39 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../../Types/Product';
+import { UserData } from '../../Types/UserData';
 import * as Icon from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 export default function Home(){
   const [products,setProducts] = useState<Product[]>([]);
+  const [user, setUser] = useState<UserData | null>(null);
+  const navigate = useNavigate();
 
-  //fetch data and load products everytime page is loaded
+  
   useEffect(()=>{
-      async function loadProducts(){
-          const productsData = await fetch('https://fakestoreapi.com/products')
-          .then(res=>res.json())
-          .catch((err)=>console.log('Error fething data: '+err))
 
-          setProducts(productsData);
+    //store userData
+    function loadUser(){
+      const userDetail = localStorage.getItem('@detailUser');
+      if(userDetail){
+        const parsed = JSON.parse(userDetail);
+        setUser(parsed);
+      }else{
+        navigate('/login');
       }
+    }
 
-      loadProducts();
+    //fetch data and load products
+    async function loadProducts(){
+      const productsData = await fetch('https://fakestoreapi.com/products')
+      .then(res=>res.json())
+      .catch((err)=>console.log('Error fething data: '+err))
+
+      setProducts(productsData);
+    }
+
+    loadUser();
+    loadProducts();
   },[]);
 
   function addToCart(product:Product):void{
@@ -32,6 +49,10 @@ export default function Home(){
     localStorage.setItem('cart',JSON.stringify(cart));
   }
 
+  function logout(){
+    console.log('logout');
+  }
+
   return (
     <div className='container'>
       <header className='d-flex py-3'>
@@ -39,7 +60,9 @@ export default function Home(){
           <h1>Shopping Cart <Icon.Cart2/></h1>
         </div>
         <div className='d-flex flex-row-reverse'>
-          <button className='btn btn-secondary'>Logout</button>
+          <button onClick={logout} className='btn btn-secondary'>Logout</button>
+          <p>{user?.email}</p>
+        </div>
         
       </header>
       <main>
