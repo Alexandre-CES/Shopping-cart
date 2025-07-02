@@ -19,6 +19,19 @@ export default function ProductView(){
             loadProducts();
     },[]);
 
+    function addToCart(product:Product):void{
+        let list = localStorage.getItem('cart');
+        let cart: Product[] = [];
+
+        if (list != null){
+            cart = JSON.parse(list);
+        }
+        
+        cart.push(product);
+
+        localStorage.setItem('cart',JSON.stringify(cart));
+  }
+
     return(
         <main id="product-main" className="container mt-5">
 
@@ -29,7 +42,13 @@ export default function ProductView(){
                 <div className="col d-grid gap-2">
                     <h2>{product?.title}</h2>
                     <h3 className="text-success fw-bold">{product?.price}$</h3>
-                    <button className='btn btn-primary w-100'><Icon.Cart2/></button>
+                    <button className='btn btn-primary w-100' onClick={()=>{
+                        if(product != undefined){
+                            addToCart(product);
+                        }else{
+                            console.log('undefined product');
+                        }
+                    }}><Icon.Cart2/></button>
                 </div>
             </div>
             <div className="row">

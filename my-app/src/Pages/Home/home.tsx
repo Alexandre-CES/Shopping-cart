@@ -3,6 +3,8 @@ import { Product } from '../../Types/Product';
 import { UserData } from '../../Types/UserData';
 import * as Icon from 'react-bootstrap-icons';
 import { Link,useNavigate } from 'react-router-dom';
+import { auth } from '../../firebaseConnection';
+import { signOut } from 'firebase/auth';
 
 export default function Home(){
   const [products,setProducts] = useState<Product[]>([]);
@@ -49,18 +51,19 @@ export default function Home(){
     localStorage.setItem('cart',JSON.stringify(cart));
   }
 
-  function logout(){
-    console.log('logout');
+  async function logout(){
+    localStorage.clear();
+    await signOut(auth);
   }
 
   return (
     <div className='container'>
-      <header className='d-flex py-3'>
+      <header className='d-flex p-3'>
         <div className='col justify-content-center'>
           <h1>Shopping Cart <Icon.Cart2/></h1>
         </div>
         <div className='d-flex flex-row-reverse'>
-          <button onClick={logout} className='btn btn-secondary'>Logout</button>
+          <button onClick={logout} className=''>Logout</button>
           <p>{user?.email}</p>
         </div>
         
