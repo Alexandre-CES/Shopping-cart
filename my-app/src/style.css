@@ -17,3 +17,12 @@
 header{
   background-color: #55DD55;
 }
+
+section#cart h2{
+  font-size:2em;
+}
+
+section#cart h3{
+  font-size:3em;
+}
+
