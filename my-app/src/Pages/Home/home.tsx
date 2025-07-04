@@ -69,6 +69,9 @@ export default function Home(){
         
       </header>
       <main>
+        <section className='mt-5 text-center'>
+          <Link to={'/cart'} className='btn btn-primary'>See cart</Link>
+        </section>
         <section className='container mt-5'>
           <div className='row justify-content-center'>
             {

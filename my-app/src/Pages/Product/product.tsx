@@ -20,7 +20,7 @@ export default function ProductView(){
     },[]);
 
     function addToCart(product:Product):void{
-        let list = localStorage.getItem('cart');
+        const list = localStorage.getItem('cart');
         let cart: Product[] = [];
 
         if (list != null){

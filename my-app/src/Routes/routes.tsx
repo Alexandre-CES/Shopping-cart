@@ -4,6 +4,7 @@ import ProductView from "../Pages/Product/product";
 import Register from "../Pages/Register/register";
 import Login from "../Pages/Login/login";
 import Private from "./Private";
+import Cart from "../Pages/Cart/cart";
 
 export default function RoutesApp(){
     return(
@@ -13,6 +14,7 @@ export default function RoutesApp(){
                 <Route path="product/:id" element={<Private><ProductView/></Private>}/>
                 <Route path="register" element={<Register/>}/>
                 <Route path="login" element={<Login/>}/>
+                <Route path="cart" element={<Cart/>}/>
             </Routes>
         </BrowserRouter>
     )
