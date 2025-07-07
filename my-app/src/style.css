@@ -1,6 +1,11 @@
+ul{
+  list-style-type: none;
+  text-align: center;
+}
+
 .img-fixed-size {
   width: 100%;
-  height: 250px;
+  max-height: 250px;
   object-fit: contain;
 }
 
@@ -15,7 +20,7 @@
 }
 
 header{
-  background-color: #55DD55;
+  background-color: #49ff95;
 }
 
 section#cart h2{

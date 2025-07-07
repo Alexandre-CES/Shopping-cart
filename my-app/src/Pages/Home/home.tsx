@@ -62,9 +62,9 @@ export default function Home(){
         <div className='col justify-content-center'>
           <h1>Shopping Cart <Icon.Cart2/></h1>
         </div>
-        <div className='d-flex flex-row-reverse'>
-          <button onClick={logout} className=''>Logout</button>
-          <p>{user?.email}</p>
+        <div className='d-flex flex-row-reverse align-items-center'>
+          <button onClick={logout} className='rounded p-1'>Logout</button>
+          <p className='my-0 mx-2'><strong>user: </strong>{user?.email}</p>
         </div>
         
       </header>
