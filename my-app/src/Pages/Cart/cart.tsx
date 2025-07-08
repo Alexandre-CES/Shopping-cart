@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react"
 import { Product } from "../../Types/Product";
+import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
-import { Link, useNavigate } from 'react-router-dom';
-import { auth } from '../../firebaseConnection';
-import { signOut } from 'firebase/auth';
-import { UserData } from '../../Types/UserData';
+import  Header  from '../../Components/Header/header';
 
 export default function Cart(){
     const [products,setProducts] = useState<Product[]>([]);
     const [totalPayment, setTotalPayment] = useState<number>(0);
-    const [user, setUser] = useState<UserData | null>(null);
-    const navigate = useNavigate();
 
     //load cart
     useEffect(()=>{
@@ -36,34 +32,10 @@ export default function Cart(){
         setTotalPayment(rounded);
     },[products]);
 
-    //store userData
-    useEffect(()=>{
-        const userDetail = localStorage.getItem('@detailUser');
-        if(userDetail){
-            const parsed = JSON.parse(userDetail);
-            setUser(parsed);
-        }else{
-            navigate('/login');
-        }
-    },[]);
-
-    async function logout(){
-        localStorage.clear();
-        await signOut(auth);
-    }
-
     return(
         <div className="container">
 
-            <header className='d-flex p-3'>
-                <div className='col justify-content-center'>
-                    <h1>Shopping Cart <Icon.Cart2/></h1>
-                </div>
-                <div className='d-flex flex-row-reverse align-items-center'>
-                    <button onClick={logout} className='rounded p-1'>Logout</button>
-                    <p className='my-0 mx-2'><strong>user: </strong>{user?.email}</p>
-                </div>
-            </header>
+            <Header/>
             <nav className="mt-5">
                 <ul>
                     <li>

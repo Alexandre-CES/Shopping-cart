@@ -1,29 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Product } from '../../Types/Product';
-import { UserData } from '../../Types/UserData';
 import * as Icon from 'react-bootstrap-icons';
-import { Link,useNavigate } from 'react-router-dom';
-import { auth } from '../../firebaseConnection';
-import { signOut } from 'firebase/auth';
+import { Link } from 'react-router-dom';
+import Header from '../../Components/Header/header';
+import { Product } from '../../Types/Product';
 
 export default function Home(){
   const [products,setProducts] = useState<Product[]>([]);
-  const [user, setUser] = useState<UserData | null>(null);
-  const navigate = useNavigate();
 
-  
   useEffect(()=>{
-
-    //store userData
-    function loadUser(){
-      const userDetail = localStorage.getItem('@detailUser');
-      if(userDetail){
-        const parsed = JSON.parse(userDetail);
-        setUser(parsed);
-      }else{
-        navigate('/login');
-      }
-    }
 
     //fetch data and load products
     async function loadProducts(){
@@ -34,7 +18,6 @@ export default function Home(){
       setProducts(productsData);
     }
 
-    loadUser();
     loadProducts();
   },[]);
 
@@ -51,23 +34,10 @@ export default function Home(){
     localStorage.setItem('cart',JSON.stringify(cart));
   }
 
-  async function logout(){
-    localStorage.clear();
-    await signOut(auth);
-  }
-
   return (
     <div className='container'>
-      <header className='d-flex p-3'>
-        <div className='col justify-content-center'>
-          <h1>Shopping Cart <Icon.Cart2/></h1>
-        </div>
-        <div className='d-flex flex-row-reverse align-items-center'>
-          <button onClick={logout} className='rounded p-1'>Logout</button>
-          <p className='my-0 mx-2'><strong>user: </strong>{user?.email}</p>
-        </div>
-        
-      </header>
+
+      <Header/>
       <main>
         <section className='mt-5 text-center'>
           <Link to={'/cart'} className='btn btn-primary'>See cart</Link>
