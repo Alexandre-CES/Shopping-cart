@@ -3,10 +3,22 @@ import { Product } from "../../Types/Product";
 import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 import  Header  from '../../Components/Header/header';
+import { db } from "../../firebaseConnection";
+import { collection, addDoc } from "firebase/firestore";
+import { UserData } from '../../Types/UserData';
 
 export default function Cart(){
     const [products,setProducts] = useState<Product[]>([]);
     const [totalPayment, setTotalPayment] = useState<number>(0);
+    const [user, setUser] = useState<UserData | null>(null);
+
+    useEffect(()=>{
+        const userDetail = localStorage.getItem('@detailUser');
+        if(userDetail){
+            const parsed = JSON.parse(userDetail);
+            setUser(parsed);
+        }
+    },[]);
 
     //load cart
     useEffect(()=>{
@@ -16,7 +28,7 @@ export default function Cart(){
         if(list != null){
             cart = JSON.parse(list);
         }else{
-            console.log('error getting products');
+            console.log('empty or unavalible list');
         }
 
         setProducts(cart);
@@ -31,6 +43,26 @@ export default function Cart(){
         const rounded: number = Math.round(n * 100) / 100;
         setTotalPayment(rounded);
     },[products]);
+
+    async function payment(){
+
+        if(products.length < 1){
+            console.log('Please, insert products in the cart');
+            return;
+        }
+
+        await addDoc(
+            collection(db,'purchases'),{
+                userId: user?.uid,
+                items: products,
+                createdAt: new Date()
+            }
+        ).then(()=>{
+            localStorage.removeItem('cart');
+        }).catch((err)=>{
+            console.log('error during payment: '+err);
+        })
+    }
 
     return(
         <div className="container">
@@ -73,7 +105,7 @@ export default function Cart(){
                                 <h2>Total</h2>
                                 <div className="border p-3 text-center">
                                     <h3 className="text-success">${totalPayment}</h3>    
-                                    <button className="btn btn-primary">Payment</button>
+                                    <button onClick={payment} className="btn btn-primary">Payment</button>
                                 </div>
                             </div>
                             
