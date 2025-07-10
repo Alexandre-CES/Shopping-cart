@@ -6,11 +6,13 @@ import  Header  from '../../Components/Header/header';
 import { db } from "../../firebaseConnection";
 import { collection, addDoc } from "firebase/firestore";
 import { UserData } from '../../Types/UserData';
+import { useNavigate } from "react-router-dom";
 
 export default function Cart(){
     const [products,setProducts] = useState<Product[]>([]);
     const [totalPayment, setTotalPayment] = useState<number>(0);
     const [user, setUser] = useState<UserData | null>(null);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const userDetail = localStorage.getItem('@detailUser');
@@ -52,13 +54,14 @@ export default function Cart(){
         }
 
         await addDoc(
-            collection(db,'purchases'),{
+            collection(db,'orders'),{
                 userId: user?.uid,
                 items: products,
                 createdAt: new Date()
             }
         ).then(()=>{
             localStorage.removeItem('cart');
+            window.location.reload();
         }).catch((err)=>{
             console.log('error during payment: '+err);
         })
