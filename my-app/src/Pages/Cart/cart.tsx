@@ -68,7 +68,7 @@ export default function Cart(){
     }
 
     return(
-        <div className="container">
+        <div className="container bg-dark" data-bs-theme="dark">
 
             <Header/>
             <nav className="mt-5">
@@ -89,7 +89,7 @@ export default function Cart(){
                                     <div key={product.id} className="row card m-3">
                                         <div className="row">
                                             <div className="col col-md-4 d-flex align-items-center">
-                                                <img src={product.image} className="img-fixed-size img-fluid rounded-start"/>
+                                                <img src={product.image} className="img-fixed-size img-fluid rounded-start rounded"/>
                                             </div>
                                             <div className="col-md-8">
                                                 <div className="card-body">
