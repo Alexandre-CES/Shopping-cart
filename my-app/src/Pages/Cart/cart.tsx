@@ -82,7 +82,7 @@ export default function Cart(){
                 <section id="cart">
                     <div className="row">
                         <div className="col-md-8 order-2 order-md-1 border rounded p-3">
-                            <h2 className="mx-3">Products</h2>
+                            <h2 className="mx-3 text-light">Products</h2>
                             {
                             products.map((product)=>{
                                 return(
@@ -103,9 +103,9 @@ export default function Cart(){
                             })
                             }
                         </div>
-                        <div className="col-md-3 order-1 order-md-2 mx-1">
+                        <div className="col-md-4 order-1 order-md-2 mb-3">
                             <div className="border rounded p-3">
-                                <h2>Total</h2>
+                                <h2 className="text-light mx-1 mb-3">Total</h2>
                                 <div className="border p-3 text-center">
                                     <h3 className="text-success">${totalPayment}</h3>    
                                     <button onClick={payment} className="btn btn-primary">Payment</button>

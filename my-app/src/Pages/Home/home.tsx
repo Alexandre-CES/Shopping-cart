@@ -49,13 +49,13 @@ export default function Home(){
                 return(
                   <div key={product.id} className='col-md-4 mb-4'>
                       <div className='card h-100'>
-                          
-                          <img className='img-fixed-size img-fluid w-100 img-thumbnail rounded' src={product.image}/>
-                          
-                          <div className='card-body row'>
+                          <div className='card-img-box d-flex'>
+                            <img className='img-fixed-size img-fluid w-100 img-thumbnail rounded' src={product.image}/>
+                          </div>
+                          <div className='card-body row align-items-center'>
                               <h3 className='card-title'>{product.price}$</h3>
                               <p>{product.title}</p>
-                              <Link to={'/product/'+product.id} target='_blank' className="card-link text-secondary">More</Link>
+                              <Link to={'/product/'+product.id} target='_blank' className='card-link text-secondary'>More</Link>
                               <button className='btn btn-primary' onClick={()=>addToCart(product)}><Icon.Cart2/></button>
                           </div>
                       </div>

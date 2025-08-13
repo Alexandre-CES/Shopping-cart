@@ -32,7 +32,7 @@ export default function Header(){
                 <h1>Shopping Cart <Icon.Cart2/></h1>
             </div>
             <div className='d-flex flex-row-reverse align-items-center'>
-                <button onClick={logout} className='btn rounded p-1'>Logout</button>
+                <button onClick={logout} className='btn rounded p-1'><Icon.DoorClosedFill/></button>
                 <p className='my-0 mx-2'><strong>user: </strong>{user?.email}</p>
             </div>
         </header>
