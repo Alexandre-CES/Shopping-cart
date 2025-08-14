@@ -40,7 +40,7 @@ export default function ProductView(){
                     <img className="img-fixed-size img-fluid img-thumbnail rounded" src={product?.image}/>
                 </div>
                 <div className="col d-grid gap-2">
-                    <h2>{product?.title}</h2>
+                    <h2 className="text-light">{product?.title}</h2>
                     <h3 className="text-success fw-bold">{product?.price}$</h3>
                     <button className='btn btn-primary w-100' onClick={()=>{
                         if(product != undefined){
@@ -51,7 +51,7 @@ export default function ProductView(){
                     }}><Icon.Cart2/></button>
                 </div>
             </div>
-            <div className="row">
+            <div className="row text-light">
                 <h2>Description</h2>
                 <p>{product?.description}</p>
             </div>

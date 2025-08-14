@@ -23,19 +23,25 @@ export default function Login(){
     }
     
     return(
-        <main className="container">
-            <form onSubmit={login}>
-                <div className="mb-3">
-                    <label htmlFor="inputEmail" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="inputEmail" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="inputPassword" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="inputPassword" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-                </div>
-                <button type="submit">Login</button>
-                <Link to={'/register'}>Register</Link>
-            </form>
-        </main>
+        <div className="container d-flex align-items-center justify-content-center h-100">
+            <main className="login-register text-light p-3 border rounded">
+                <h1 className="text-center mb-4">Login</h1>
+                <form onSubmit={login}>
+                    <div className="mb-3">
+                        <label htmlFor="inputEmail" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="inputEmail" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputPassword" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="inputPassword" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                    </div>
+                    <div className="text-center">
+                        <button type="submit" className="btn btn-primary m-3">Login</button>
+                        <p className="m-0">Not registered yet? <Link to={'/register'}>Register</Link></p>
+                    </div>
+                    
+                </form>
+            </main>
+        </div>
     )
 }

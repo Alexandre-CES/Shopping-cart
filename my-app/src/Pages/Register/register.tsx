@@ -25,23 +25,28 @@ export default function Register(){
     }
     
     return(
-        <main className="container">
-            <form onSubmit={register}>
-                <div className="mb-3">
-                    <label htmlFor="inputEmail" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="inputEmail" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="inputPassword" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="inputPassword" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="inputConfirmPassword" className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control" id="inputConfirmPassword" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
-                </div>
-                <button type="submit">Register</button>
-                <Link to={'/login'}>Login</Link>
-            </form>
-        </main>
+        <div className="container d-flex align-items-center justify-content-center h-100">
+            <main className="login-register text-light p-3 border rounded">
+                <h1 className="text-center mb-4">Register</h1>
+                <form onSubmit={register}>
+                    <div className="mb-3">
+                        <label htmlFor="inputEmail" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="inputEmail" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputPassword" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="inputPassword" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="inputConfirmPassword" className="form-label">Confirm Password</label>
+                        <input type="password" className="form-control" id="inputConfirmPassword" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)}/>
+                    </div>
+                    <div className="text-center">
+                        <button type="submit" className="btn btn-primary m-3">Register</button>
+                        <p className="m-0">Already registered? <Link to={'/login'}>Login</Link></p>
+                    </div>
+                </form>
+            </main>
+        </div>
     )
 }
