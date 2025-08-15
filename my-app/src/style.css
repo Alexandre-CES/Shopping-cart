@@ -26,6 +26,10 @@ ul{
   text-align: center;
 }
 
+  #product-main h3{
+    font-size:4em;
+  }
+
 
 /** CLASSES */
   .img-fixed-size {
@@ -54,40 +58,4 @@ ul{
     height: 200px;
   }
 
-/** Login / Register */
-  @media screen and (max-width:991px){
-    .login-register{
-      width: 100%;
-    }
-  }
 
-  @media screen and (min-width:992px){
-    .login-register{
-      width: 50%;
-    }
-  }
-
-  #product-main h3{
-      font-size:4em;
-  }
-
-/** Cart */
-  @media screen and (max-width:991px){
-    section#cart h2{
-      font-size:1.5em;
-    }
-
-    section#cart h3{
-      font-size:2em;
-    }
-  }
-
-  @media screen and (min-width:992px){
-    section#cart h2{
-      font-size:2em;
-    }
-
-    section#cart h3{
-      font-size:3em;
-    }
-  }

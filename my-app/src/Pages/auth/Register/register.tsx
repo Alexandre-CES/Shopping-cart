@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConnection";
+import { auth } from "../../../firebaseConnection";
+import '../auth.css';
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ export default function Register() {
   async function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (email != "" && password != "") {
+    if (email !== "" && password !== "") {
       await createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
           navigate("/", { replace: true });
@@ -26,8 +27,8 @@ export default function Register() {
   }
 
   return (
-    <div className="container d-flex align-items-center justify-content-center h-100">
-      <main className="login-register text-light p-3 border rounded">
+    <div className="login-register container d-flex align-items-center justify-content-center h-100">
+      <main className="text-light p-3 border rounded shadow">
         <h1 className="text-center mb-4">Register</h1>
         <form onSubmit={register}>
           <div className="mb-3">

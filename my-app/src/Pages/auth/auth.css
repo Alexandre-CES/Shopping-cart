@@ -1,0 +1,48 @@
+.login-register main{
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.74), transparent);
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.699);
+}
+
+div.login-register{
+  max-width: 100%;
+  width: 100%;
+}
+
+/* media query */
+  /* mobile */
+  @media screen and (max-width:600px){
+    
+    .login-register main{
+      width: 100%;
+    }
+  }
+
+  /* tablet */
+  @media screen and (min-width:559px) and (max-width:991px){
+    
+    .login-register main{
+      width: 70%;
+    }
+  }
+
+  /* small screens */
+  @media screen and (max-width:991px){
+    .login-register{
+      background: url('../../assets/imgs/loginregisterbackground.png') no-repeat center;
+      background-size: cover;
+    }
+
+    
+  }
+
+  /* big screens */
+  @media screen and (min-width:992px){
+    .login-register{
+      background: url('../../assets/imgs/loginregisterbackgroundlarge.png') no-repeat center;
+      background-size: cover;
+    }
+
+    .login-register main{
+      width: 50%;
+    }
+  }

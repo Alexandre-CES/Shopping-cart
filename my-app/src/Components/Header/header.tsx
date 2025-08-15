@@ -37,7 +37,6 @@ export default function Header() {
           <Icon.DoorClosedFill />
         </button>
         <p className="my-0 mx-2">
-          <strong>user: </strong>
           {user?.email}
         </p>
       </div>

@@ -7,6 +7,7 @@ import { db } from "../../firebaseConnection";
 import { collection, addDoc } from "firebase/firestore";
 import { UserData } from '../../Types/UserData';
 import { useNavigate } from "react-router-dom";
+import './cart.css';
 
 export default function Cart() {
   const [products, setProducts] = useState<Product[]>([]);
