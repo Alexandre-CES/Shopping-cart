@@ -8,8 +8,5 @@ function App() {
     <RoutesApp/>
   )
 }
-/*
-{product.id};
-{product.category};
-*/
+
 export default App;

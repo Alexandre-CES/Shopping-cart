@@ -1,28 +1,28 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebaseConnection";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebaseConnection';
 import '../auth.css';
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
   async function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (email !== "" && password !== "") {
+    if (email !== '' && password !== '') {
       await createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
-          navigate("/", { replace: true });
+          navigate('/', { replace: true });
         })
         .catch((err) => {
-          console.log("error: " + err);
+          console.log('error: ' + err);
         });
     } else {
-      alert("fill the fields");
+      alert('fill the fields');
     }
   }
 

@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react"
-import { Product } from "../../Types/Product";
+import { useState, useEffect } from 'react'
+import { Product } from '../../Types/Product';
 import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 import Header from '../../Components/Header/header';
-import { db } from "../../firebaseConnection";
-import { collection, addDoc } from "firebase/firestore";
+import { db } from '../../firebaseConnection';
+import { collection, addDoc } from 'firebase/firestore';
 import { UserData } from '../../Types/UserData';
-import { useNavigate } from "react-router-dom";
 import './cart.css';
 
 export default function Cart() {
   const [products, setProducts] = useState<Product[]>([]);
   const [totalPayment, setTotalPayment] = useState<number>(0);
   const [user, setUser] = useState<UserData | null>(null);
-  const navigate = useNavigate();
 
   // load user
   useEffect(() => {

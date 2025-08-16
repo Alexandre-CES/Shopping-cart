@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Product } from "../../Types/Product";
-import * as Icon from "react-bootstrap-icons";
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Product } from '../../Types/Product';
+import * as Icon from 'react-bootstrap-icons';
+import addToCart from '../../functions/addToCart';
 
 export default function ProductView() {
   const { id } = useParams();
@@ -11,43 +12,37 @@ export default function ProductView() {
     async function loadProducts() {
       const productData = await fetch(`https://fakestoreapi.com/products/${id}`)
         .then((res) => res.json())
-        .catch((err) => console.log("Error fething data: " + err));
+        .catch((err) => console.log('Error fething data: ' + err));
 
       setProduct(productData);
     }
 
     loadProducts();
-  }, []);
-
-  function addToCart(product: Product): void {
-    const list = localStorage.getItem("cart");
-    let cart: Product[] = [];
-
-    if (list != null) {
-      cart = JSON.parse(list);
-    }
-
-    cart.push(product);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
+  }, [id]);
 
   return (
-    <main id="product-main" className="container mt-5">
-      <div className="row my-5 align-items-center">
-        <div className="col">
+    <main id="product-main" className="container-md mt-md-5 p-3 border rounded shadow">
+
+      {/* row */}
+      <div className="row align-items-center mb-4">
+
+        {/* img col */}
+        <div className="col-md">
           <img
             className="img-fixed-size img-fluid img-thumbnail rounded"
             src={product?.image}
+            alt={product?.title}
           />
         </div>
-        <div className="col d-grid gap-2">
+
+        {/* title and price col */}
+        <div className="col-md d-grid gap-2">
           <h2 className="text-light">{product?.title}</h2>
           <h3 className="text-success fw-bold">{product?.price}$</h3>
           <button
             className="btn btn-primary w-100"
             onClick={() => {
-              if (product != undefined) {
+              if (product !== undefined) {
                 addToCart(product);
               } else {
                 console.log("undefined product");
@@ -58,8 +53,10 @@ export default function ProductView() {
           </button>
         </div>
       </div>
-      <div className="row text-light">
-        <h2>Description</h2>
+
+      {/* row */}
+      <div className="row mt-3 text-light border-top">
+        <h2 className="my-3">Description</h2>
         <p>{product?.description}</p>
       </div>
     </main>

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import * as Icon from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
-import Header from "../../Components/Header/header";
-import { Product } from "../../Types/Product";
+import { useEffect, useState } from 'react';
+import * as Icon from 'react-bootstrap-icons';
+import { Link } from 'react-router-dom';
+import Header from '../../Components/Header/header';
+import { Product } from '../../Types/Product';
+import addToCart from '../../functions/addToCart';
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -10,28 +11,15 @@ export default function Home() {
   useEffect(() => {
     //fetch data and load products
     async function loadProducts() {
-      const productsData = await fetch("https://fakestoreapi.com/products")
+      const productsData = await fetch('https://fakestoreapi.com/products')
         .then((res) => res.json())
-        .catch((err) => console.log("Error fething data: " + err));
+        .catch((err) => console.log('Error fething data: ' + err));
 
       setProducts(productsData);
     }
 
     loadProducts();
   }, []);
-
-  function addToCart(product: Product): void {
-    let list = localStorage.getItem("cart");
-    let cart: Product[] = [];
-
-    if (list != null) {
-      cart = JSON.parse(list);
-    }
-
-    cart.push(product);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
 
   return (
     <div className="container bg-dark" data-bs-theme="dark">
@@ -59,7 +47,6 @@ export default function Home() {
                       <p>{product.title}</p>
                       <Link
                         to={"/product/" + product.id}
-                        target="_blank"
                         className="card-link text-secondary"
                       >
                         More
