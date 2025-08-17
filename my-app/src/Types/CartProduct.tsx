@@ -1,11 +1,9 @@
-//Info we get using https://fakestoreapi.com/products
-
-export type Product = {
+export type CartProduct = {
+  uid: string;
   id: number;
   title: string;
   price: number;
   description: string;
   category: string;
   image: string;
-};
-
+}

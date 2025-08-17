@@ -16,6 +16,7 @@ export default function Home() {
         .catch((err) => console.log('Error fething data: ' + err));
 
       setProducts(productsData);
+      
     }
 
     loadProducts();

@@ -7,9 +7,10 @@ import { db } from '../../firebaseConnection';
 import { collection, addDoc } from 'firebase/firestore';
 import { UserData } from '../../Types/UserData';
 import './cart.css';
+import { CartProduct } from '../../Types/CartProduct';
 
 export default function Cart() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<CartProduct[]>([]);
   const [totalPayment, setTotalPayment] = useState<number>(0);
   const [user, setUser] = useState<UserData | null>(null);
 
@@ -25,7 +26,7 @@ export default function Cart() {
   // load cart
   useEffect(() => {
     const list = localStorage.getItem('cart');
-    let cart: Product[] = [];
+    let cart: CartProduct[] = [];
 
     if (list != null) {
       cart = JSON.parse(list);
@@ -66,11 +67,11 @@ export default function Cart() {
     })
   }
 
-  function removeFromCart(product: Product) {
+  function removeFromCart(product: CartProduct) {
         const cartStr:string | null = localStorage.getItem('cart');
         if (cartStr){
             const cart = JSON.parse(cartStr);
-            const updatedCart = cart.filter((item:Product) => item.id !== product.id);
+            const updatedCart = cart.filter((item:CartProduct) => item.uid !== product.uid);
             localStorage.setItem('cart', JSON.stringify(updatedCart));
             setProducts(updatedCart);
         }else{
@@ -93,7 +94,7 @@ export default function Cart() {
               <h2 className="mx-3 text-light">Products</h2>
               {products.map((product) => {
                 return (
-                  <div key={product.id} className="row card m-3">
+                  <div key={product.uid} className="row card m-3">
                     <div className="row">
                       <div className="col col-md-4 d-flex align-items-center">
                         <img src={product.image} className="img-fixed-size img-fluid rounded-start rounded" />
