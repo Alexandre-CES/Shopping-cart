@@ -1,13 +1,14 @@
-import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Product } from '../../Types/Product';
+import { useParams, useNavigate } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
+import { Product } from '../../Types/Product';
 import addToCart from '../../functions/addToCart';
 import Header from '../../Components/Header/header';
 
 export default function ProductView() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadProducts() {
@@ -47,8 +48,9 @@ export default function ProductView() {
               onClick={() => {
                 if (product !== undefined) {
                   addToCart(product);
+                  navigate('/cart');
                 } else {
-                  console.log("undefined product");
+                  console.error("undefined product");
                 }
               }}
             >

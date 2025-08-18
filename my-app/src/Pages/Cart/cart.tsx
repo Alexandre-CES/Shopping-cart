@@ -13,38 +13,41 @@ export default function Cart() {
   const [totalPayment, setTotalPayment] = useState<number>(0);
   const [user, setUser] = useState<UserData | null>(null);
 
-  // load user
-  useEffect(() => {
-    const userDetail = localStorage.getItem('@detailUser');
-    if (userDetail) {
-      const parsed = JSON.parse(userDetail);
-      setUser(parsed);
-    }
-  }, []);
-
-  // load cart
-  useEffect(() => {
-    const list = localStorage.getItem('cart');
-    let cart: CartProduct[] = [];
-
-    if (list != null) {
-      cart = JSON.parse(list);
-    } else {
-      console.log('empty or unavalible list');
+  useEffect(()=>{
+    function loadUser(){
+      const userDetail = localStorage.getItem('@detailUser');
+      if (userDetail) {
+        const parsed = JSON.parse(userDetail);
+        setUser(parsed);
+      }
     }
 
-    setProducts(cart);
-  }, []);
+    function loadCart(){
+      const list = localStorage.getItem('cart');
+      let cart: CartProduct[] = [];
 
-  // calc 
-  useEffect(() => {
+      if (list != null) {
+        cart = JSON.parse(list);
+      } else {
+        console.log('empty or unavalible list');
+      }
+
+      setProducts(cart); 
+    }
+
+    loadUser();
+    loadCart();
+  },[])
+
+  //calc payment
+  useEffect(()=>{
     let n = 0;
     for (let product of products) {
       n += product.price;
     }
     const rounded: number = Math.round(n * 100) / 100;
     setTotalPayment(rounded);
-  }, [products]);
+  },[products])
 
   async function payment() {
     if (products.length < 1) {
@@ -54,7 +57,7 @@ export default function Cart() {
 
     await addDoc(
       collection(db, 'orders'), {
-        userId: user?.uid,
+        userUid: user?.uid,
         items: products,
         createdAt: new Date()
       }
