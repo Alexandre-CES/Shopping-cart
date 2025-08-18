@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { UserData } from "../../Types/UserData";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
 import { auth } from "../../firebaseConnection";
 import { signOut } from "firebase/auth";
@@ -18,7 +18,7 @@ export default function Header() {
     } else {
       navigate("/login");
     }
-  }, []);
+  }, [navigate]);
 
   async function logout() {
     localStorage.clear();
@@ -26,11 +26,13 @@ export default function Header() {
   }
 
   return (
-    <header className="header-dark d-flex p-3 bg-success">
+    <header className="header-dark d-flex p-3 bg-success shadow mb-3">
       <div className="col justify-content-center">
-        <h1>
-          Shopping Cart <Icon.Cart2 />
-        </h1>
+        <Link to={'/'}>
+          <h1>
+            Shopping Cart <Icon.Cart2 />
+          </h1>
+        </Link>
       </div>
       <div className="d-flex flex-row-reverse align-items-center">
         <button onClick={logout} className="btn rounded p-1">

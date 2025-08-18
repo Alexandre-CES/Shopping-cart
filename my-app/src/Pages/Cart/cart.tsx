@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Product } from '../../Types/Product';
 import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 import Header from '../../Components/Header/header';
@@ -97,7 +96,7 @@ export default function Cart() {
                   <div key={product.uid} className="row card m-3">
                     <div className="row">
                       <div className="col col-md-4 d-flex align-items-center">
-                        <img src={product.image} className="img-fixed-size img-fluid rounded-start rounded" />
+                        <img src={product.image} className="img-fixed-size img-fluid rounded-start rounded" alt={product.title}/>
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">

@@ -6,6 +6,11 @@ body{
   background-color: #151515;
 }
 
+header a, header button{
+  text-decoration:none;
+  color: white;
+}
+
 header.header-dark {
   background-color: #198754;
   color: rgb(241, 241, 241);
