@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
-import Header from '../../Components/Header/header';
-import { db } from '../../firebaseConnection';
+import Header from '../../components/header/Header';
+import { db } from '../../services/firebaseConnection';
 import { collection, addDoc } from 'firebase/firestore';
-import { UserData } from '../../Types/UserData';
+import { UserData } from '../../models/UserData';
+import { CartProduct } from '../../models/Product';
 import './cart.css';
-import { CartProduct } from '../../Types/CartProduct';
 
 export default function Cart() {
   const [products, setProducts] = useState<CartProduct[]>([]);
@@ -28,8 +28,6 @@ export default function Cart() {
 
       if (list != null) {
         cart = JSON.parse(list);
-      } else {
-        console.log('empty or unavalible list');
       }
 
       setProducts(cart); 
@@ -70,7 +68,8 @@ export default function Cart() {
   }
 
   function removeFromCart(product: CartProduct) {
-        const cartStr:string | null = localStorage.getItem('cart');
+
+        const cartStr = localStorage.getItem('cart');
         if (cartStr){
             const cart = JSON.parse(cartStr);
             const updatedCart = cart.filter((item:CartProduct) => item.uid !== product.uid);
