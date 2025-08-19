@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { UserData } from "../../Types/UserData";
+import { UserData } from "../../models/UserData";
 import { Link, useNavigate } from "react-router-dom";
 import * as Icon from "react-bootstrap-icons";
-import { auth } from "../../firebaseConnection";
+import { auth } from "../../services/firebaseConnection";
 import { signOut } from "firebase/auth";
 
 export default function Header() {
@@ -26,7 +26,7 @@ export default function Header() {
   }
 
   return (
-    <header className="header-dark d-flex p-3 bg-success shadow mb-3">
+    <header id="Header" className="header-dark d-flex p-3 bg-success shadow mb-3">
       <div className="col justify-content-center">
         <Link to={'/'}>
           <h1>

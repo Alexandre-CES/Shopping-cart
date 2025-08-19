@@ -1,7 +1,17 @@
-import { Product } from '../Types/Product';
-import { CartProduct } from '../Types/CartProduct';
+/*
+  * This async function receives a Product, then add to the cart, creating a new id for it
 
-function generateId() {
+  ? use:
+    await addToCart(product:Product).then(()=>{
+      console.log('success');
+    }).catch((err)=>{
+      console.error(err);
+    })
+*/
+
+import { Product, CartProduct } from '../models/Product';
+
+function generateId():string {
   return crypto.randomUUID();
 }
 
@@ -10,6 +20,9 @@ export default async function addToCart(product: Product): Promise<void> {
     let list = localStorage.getItem('cart');
     let cart: CartProduct[] = [];
 
+    /*
+      if localStorage already have products, insert into the new cart 
+    */
     if (list != null) {
       cart = JSON.parse(list);
     }
@@ -25,6 +38,7 @@ export default async function addToCart(product: Product): Promise<void> {
       image: product.image
     }
     
+    //inser new product into the cart
     cart.push(newProduct);
     localStorage.setItem('cart', JSON.stringify(cart));
     return;

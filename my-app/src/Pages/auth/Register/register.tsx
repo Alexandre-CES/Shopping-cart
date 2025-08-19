@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../../firebaseConnection';
+import { auth } from '../../../services/firebaseConnection';
 import '../auth.css';
 
 export default function Register() {
@@ -13,7 +13,7 @@ export default function Register() {
   async function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (email !== '' && password !== '') {
+    if (email !== '' && password !== '' && confirmPassword !== '') {
       await createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
           navigate('/', { replace: true });

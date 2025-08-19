@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react';
 import * as Icon from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import Header from '../../Components/Header/header';
-import { Product } from '../../Types/Product';
-import addToCart from '../../functions/addToCart';
+import Header from '../../components/header/Header';
+import { Product } from '../../models/Product';
+import addToCart from '../../utils/addToCart';
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -32,9 +32,12 @@ export default function Home() {
       setSuccess(false);
     })
     
+    //reset timer
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
+
+    //timer to remove message
     timeoutRef.current = setTimeout(() => setMessage(null), 3000);
   }
 
@@ -42,20 +45,28 @@ export default function Home() {
     <div className="container bg-dark" data-bs-theme="dark">
       <Header />
       <main>
+
         {
+        /* alert for adding products to cart */
         message && (
           <div className={`alert ${success ? "alert-success" : "alert-danger"} z-1 position-fixed top-0 start-50 translate-middle-x text-center mt-5`}>
             {message}
           </div>
         )
         }
+
+        {/* nav to cart */}
         <section className="mt-5 text-center">
           <Link to={"/cart"} className="btn btn-primary">
             See cart
           </Link>
         </section>
+
+        {/* Products */}
         <section className="container mt-5">
           <div className="row justify-content-center">
+
+            {/* each card */}
             {products.map((product) => {
               return (
                 <div key={product.id} className="col-md-4 mb-4">
@@ -87,6 +98,7 @@ export default function Home() {
                 </div>
               );
             })}
+
           </div>
         </section>
       </main>
