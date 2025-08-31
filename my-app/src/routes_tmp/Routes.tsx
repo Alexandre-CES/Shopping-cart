@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from '../pages/home/Home';
-import ProductView from "../pages/product/Product";
-import Register from "../pages/auth/register/Register";
-import Login from "../pages/auth/login/Login";
+import Home from '../pages_tmp/home_tmp/Home';
+import ProductView from "../pages_tmp/product_tmp/Product";
+import Register from "../pages_tmp/auth_tmp/register/Register";
+import Login from "../pages_tmp/auth_tmp/login/Login";
 import Private from "./Private";
-import Cart from "../pages/cart/Cart";
+import Cart from "../pages_tmp/cart_tmp/Cart";
 
 export default function RoutesApp(){
     return(

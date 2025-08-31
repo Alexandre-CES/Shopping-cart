@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import * as Icon from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import Header from '../../components/header/Header';
+import Header from '../../components_tmp/header/Header';
 import { Product } from '../../models/Product';
 import addToCart from '../../utils/addToCart';
 
