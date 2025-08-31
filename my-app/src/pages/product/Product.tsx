@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 import { Product } from '../../models/Product';
 import addToCart from '../../utils/addToCart';
-import Header from '../../components_tmp/header/Header';
+import Header from '../../components/header/Header';
 
 export default function ProductView() {
   const { id } = useParams();

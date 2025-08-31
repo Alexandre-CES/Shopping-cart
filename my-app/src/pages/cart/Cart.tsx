@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
-import Header from '../../components_tmp/header/Header';
+import Header from '../../components/header/Header';
 import { db } from '../../services/firebaseConnection';
 import { collection, addDoc } from 'firebase/firestore';
 import { UserData } from '../../models/UserData';
