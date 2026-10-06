@@ -14,13 +14,14 @@ export default function Home() {
   useEffect(() => {
     //fetch data and load products
     async function loadProducts() {
-      const productsData = await fetch('https://fakestoreapi.com/products')
+      const productsData = await fetch('https://dummyjson.com/products')
         .then((res) => res.json())
         .catch((err) => console.log('Error fething data: ' + err));
 
-      setProducts(productsData);  
+      setProducts(productsData.products);  
     }
     loadProducts();
+    
   }, []);
 
   async function handleAdd(product: Product) {
@@ -65,7 +66,7 @@ export default function Home() {
         {/* Products */}
         <section className="container mt-5">
           <div className="row justify-content-center">
-
+            
             {/* each card */}
             {products.map((product) => {
               return (
@@ -74,7 +75,7 @@ export default function Home() {
                     <div className="card-img-box d-flex">
                       <img
                         className="img-fixed-size img-fluid w-100 img-thumbnail rounded"
-                        src={product.image}
+                        src={product.images[0]}
                         alt={product.title}
                       />
                     </div>
@@ -98,7 +99,7 @@ export default function Home() {
                 </div>
               );
             })}
-
+          
           </div>
         </section>
       </main>

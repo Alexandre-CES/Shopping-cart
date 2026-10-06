@@ -35,7 +35,7 @@ export default async function addToCart(product: Product): Promise<void> {
       price: product.price,
       description: product.description,
       category: product.category,
-      image: product.image
+      images: product.images
     }
     
     //inser new product into the cart

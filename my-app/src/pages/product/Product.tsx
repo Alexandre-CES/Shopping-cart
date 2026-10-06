@@ -34,7 +34,7 @@ export default function ProductView() {
           <div className="col-md">
             <img
               className="img-fixed-size img-fluid img-thumbnail rounded"
-              src={product?.image}
+              src={product?.images[0]}
               alt={product?.title}
             />
           </div>
