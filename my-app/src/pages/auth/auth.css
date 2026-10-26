@@ -1,11 +1,16 @@
 .login-register main{
   background: linear-gradient(to top, rgba(0, 0, 0, 0.74), transparent);
-  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.699);
 }
 
 div.login-register{
   max-width: 100%;
   width: 100%;
+}
+
+.login-error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
 }
 
 /* media query */

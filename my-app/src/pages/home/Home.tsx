@@ -18,7 +18,22 @@ export default function Home() {
         .then((res) => res.json())
         .catch((err) => console.log('Error fething data: ' + err));
 
-      setProducts(productsData.products);  
+      const productList = productsData.products
+  
+      let products: Product[] = [];
+      for (let i = 0; i < productList.length; i++ ){
+        const newProduct : Product = {
+          id : productList[i].id,
+          title : productList[i].title, 
+          price : productList[i].price, 
+          description : productList[i].description, 
+          category : productList[i].category, 
+          image : productList[i].thumbnail
+        }
+        
+        products.push(newProduct)
+      }
+      setProducts(products);
     }
     loadProducts();
     
@@ -72,22 +87,21 @@ export default function Home() {
               return (
                 <div key={product.id} className="col-md-4 mb-4">
                   <div className="card h-100">
-                    <div className="card-img-box d-flex">
-                      <img
-                        className="img-fixed-size img-fluid w-100 img-thumbnail rounded"
-                        src={product.images[0]}
-                        alt={product.title}
-                      />
-                    </div>
+                    <Link
+                      to={"/product/" + product.id}
+                      className="card-link"
+                    >
+                      <div className="card-img-box d-flex">
+                        <img
+                          className="img-fixed-size img-fluid w-100 img-thumbnail rounded"
+                          src={product.image}
+                          alt={product.title}
+                        />
+                      </div>
+                    </Link>
                     <div className="card-body row align-items-center">
                       <h3 className="card-title">{product.price}$</h3>
-                      <p>{product.title}</p>
-                      <Link
-                        to={"/product/" + product.id}
-                        className="card-link text-secondary"
-                      >
-                        More
-                      </Link>
+                      <p>{product.title}</p>              
                       <button
                         className="btn btn-primary click-transition"
                         onClick={() => handleAdd(product)}

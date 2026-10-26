@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../services/firebaseConnection';
+import { handleFirebaseAuthErrors } from '../../../utils/handleFirebaseErrors'
 import '../auth.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   async function login(e: React.FormEvent<HTMLFormElement>) {
@@ -17,10 +19,10 @@ export default function Login() {
           navigate('/', { replace: true });
         })
         .catch((err) => {
-          console.log('error: ' + err);
+          setError(handleFirebaseAuthErrors(err.code))
         });
     } else {
-      alert('fill the fields');
+      setError('fill the fields');
     }
   }
 
@@ -55,6 +57,9 @@ export default function Login() {
               />
             </div>
             <div className="text-center">
+              {error.length > 1
+                ?<div className="login-error" role="alert">{error}</div>
+                :<div></div>}
               <button type="submit" className="btn btn-primary m-3">
                 Login
               </button>

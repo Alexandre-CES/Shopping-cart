@@ -2,27 +2,33 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../services/firebaseConnection';
+import { handleFirebaseAuthErrors } from '../../../utils/handleFirebaseErrors'
 import '../auth.css';
 
 export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   async function register(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (email !== '' && password !== '' && confirmPassword !== '') {
+      if (password !== confirmPassword){
+        setError('Passwords must mach')
+        return
+      }
       await createUserWithEmailAndPassword(auth, email, password)
         .then(() => {
           navigate('/', { replace: true });
         })
         .catch((err) => {
-          console.log('error: ' + err);
+          setError(handleFirebaseAuthErrors(err.code))
         });
     } else {
-      alert('fill the fields');
+      setError('fill the fields');
     }
   }
 
@@ -69,6 +75,9 @@ export default function Register() {
               />
             </div>
             <div className="text-center">
+              {error.length > 1
+                ?<div className="login-error" role="alert">{error}</div>
+                :<div></div>}
               <button type="submit" className="btn btn-primary m-3">
                 Register
               </button>

@@ -11,22 +11,31 @@ export default function ProductView() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function loadProducts() {
-      const productData = await fetch(`https://fakestoreapi.com/products/${id}`)
+    async function loadProduct() {
+      const productData = await fetch(`https://dummyjson.com/products/${id}`)
         .then((res) => res.json())
-        .catch((err) => console.log('Error fething data: ' + err));
+        .catch((err) => 
+          console.log('Error fething data: ' + err));
+        
+      const newProduct: Product = {
+        id : productData.id,
+        title: productData.title,
+        price: productData.price,
+        description: productData.description,
+        category: productData.category,
+        image: productData.thumbnail
+      }
 
-      setProduct(productData);
+      setProduct(newProduct)
     }
-
-    loadProducts();
+    loadProduct();
   }, [id]);
 
   return (
     <div className='container-md'>
       <Header/>
       <main id="product-main" className="container-md mt-md-5 p-3 border rounded shadow">
-
+      
         {/* row */}
         <div className="row align-items-center mb-4">
 
@@ -34,7 +43,7 @@ export default function ProductView() {
           <div className="col-md">
             <img
               className="img-fixed-size img-fluid img-thumbnail rounded"
-              src={product?.images[0]}
+              src={product?.image}
               alt={product?.title}
             />
           </div>
@@ -63,7 +72,8 @@ export default function ProductView() {
         <div className="row mt-3 text-light border-top">
           <h2 className="my-3">Description</h2>
           <p>{product?.description}</p>
-        </div>
+        </div>  
+
       </main>
     </div>
   );

@@ -6,3 +6,4 @@ Simple shopping cart design built in React and Firebase. Includes login, registr
 
 ## You can check it here:
 https://shopping-cart-blush-six.vercel.app
+
