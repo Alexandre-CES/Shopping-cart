@@ -89,7 +89,7 @@ export default function OrdersView() {
                       <div className="d-flex flex-row justify-content-between align-items-end mb-3 py-1 px-3 border rounded text-muted ">
                         <div className="d-flex flex-row align-items-center">
                           <div className="orders-product-image-box d-flex align-items-center">
-                            <img src={product.image} alt="Product image" className="img-fixed-size img-fluid rounded-start rounded"/>
+                            <img src={product.image} alt={product.title} className="img-fixed-size img-fluid rounded-start rounded"/>
                           </div>
                           <div>
                             <p className="my-0">{product.title}</p>
