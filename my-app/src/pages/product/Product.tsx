@@ -1,14 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as Icon from 'react-bootstrap-icons';
 import { Product } from '../../models/Product';
 import addToCart from '../../utils/addToCart';
 import Header from '../../components/header/Header';
+import './product.css';
 
 export default function ProductView() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product>();
-  const navigate = useNavigate();
+  const [message, setMessage] = useState<string | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     async function loadProduct() {
@@ -31,50 +35,92 @@ export default function ProductView() {
     loadProduct();
   }, [id]);
 
-  return (
-    <div className='container-md'>
-      <Header/>
-      <main id="product-main" className="container-md mt-md-5 p-3 border rounded shadow">
-      
-        {/* row */}
-        <div className="row align-items-center mb-4">
+  //call addToCart function and shows result at screen
+  async function handleAdd(product: Product) {
+    await addToCart(product.id).then(()=>{
+      setMessage(`${product.title} Added to cart ✅`);
+      setSuccess(true);
+    }).catch((err)=>{
+      setMessage(`Error adding ${product.title}: `+err);
+      setSuccess(false);
+    })
+    
+    //reset timer
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
 
-          {/* img col */}
-          <div className="col-md">
-            <img
-              className="img-fixed-size img-fluid img-thumbnail rounded"
-              src={product?.image}
-              alt={product?.title}
-            />
-          </div>
+    //timer to remove message
+    timeoutRef.current = setTimeout(() => setMessage(null), 3000);
+  }
 
-          {/* title and price col */}
-          <div className="col-md d-grid gap-2">
-            <h2 className="text-light">{product?.title}</h2>
-            <h3 className="text-success fw-bold">{product?.price}$</h3>
-            <button
-              className="btn btn-primary w-100"
-              onClick={() => {
-                if (product !== undefined) {
-                  addToCart(product);
-                  navigate('/cart');
-                } else {
-                  console.error("undefined product");
-                }
-              }}
+  if (!product) {
+    return null;
+  }else{
+    return (
+      <div>
+        <Header/>
+
+        <nav className="mt-5 text-center">
+          <Link to={'/'} className="btn btn-primary">
+            <Icon.ArrowLeftCircle />
+          </Link>
+        </nav>
+        <main id="product-main" className="container mt-1 mt-md-5 mb-5">
+
+          {
+          /* alert for adding products to cart */
+          message && (
+            <div 
+              className={
+                `alert ${success ? "alert-success" : "alert-danger"} 
+                z-1 position-fixed top-0 start-50 translate-middle-x text-center mt-5`
+              }
             >
-              <Icon.Cart2 />
-            </button>
-          </div>
-        </div>
+              {message}
+            </div>
+          )
+          }
+          
+          <section id="product-section" className="p-3 m-auto border rounded shadow bg-surface">
+            {/* row */}
+            <div className="row align-items-center mb-4">
 
-        {/* row */}
-        <div className="row mt-3 text-light border-top">
-          <h2 className="my-3">Description</h2>
-          <p>{product?.description}</p>
-        </div>  
+              {/* img col */}
+              <div className="col-12 col-md-6 align-items-center">
+                <img
+                  className="img-fixed-size img-fluid img-thumbnail rounded"
+                  src={product.image}
+                  alt={product.title}
+                />
+              </div>
 
-      </main>
-    </div>
-  );
+              {/* title and price col */}
+              <div className="col-12 col-md-6">
+                <h2 className="text-light">{product.title}</h2>
+                <div>
+                  <h3 className="text-success fw-bold">{product.price}$</h3>
+                  <button
+                    className="btn btn-primary w-100"
+                    onClick={() => handleAdd(product)}
+                  >
+                    <Icon.Cart2 />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* row */}
+            <div className="row mt-3 text-light border-top">
+              <h2 className="my-3">Description</h2>
+              <p>{product.description}</p>
+            </div>  
+
+          
+          
+          </section>
+        </main>
+      </div>
+    );
+  }
 }

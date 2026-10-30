@@ -1,9 +1,11 @@
-html, body, #root{
-  height: 100%;
+:root{
+  --color-background:#171717;
+  --color-surface:#15181b;
 }
 
-body{
-  background-color: #151515;
+html, body, #root{
+  height: 100%;
+  background-color: var(--color-background);
 }
 
 ul{
@@ -29,10 +31,6 @@ ul{
   #Header button:hover{
     background-color: rgb(100, 100, 100);
     transform: scale(1.1);
-  }
-
-  #product-main h3{
-    font-size:4em;
   }
 
 
@@ -63,4 +61,10 @@ ul{
     height: 200px;
   }
 
+  .bg-background{
+    background-color: var(--color-background);
+  }
 
+  .bg-surface{
+    background-color: var(--color-surface);
+  }

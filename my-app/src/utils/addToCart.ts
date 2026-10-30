@@ -1,47 +1,35 @@
-/*
-  * This async function receives a Product, then add to the cart, creating a new id for it
+import { CartProduct } from '../models/Product';
 
-  ? use:
-    await addToCart(product:Product).then(()=>{
-      console.log('success');
-    }).catch((err)=>{
-      console.error(err);
-    })
-*/
-
-import { Product, CartProduct } from '../models/Product';
-
-function generateId():string {
-  return crypto.randomUUID();
-}
-
-export default async function addToCart(product: Product): Promise<void> {
+export default async function addToCart(product_id: number): Promise<void> {
   try{
     let list = localStorage.getItem('cart');
     let cart: CartProduct[] = [];
 
-    /*
-      if localStorage already have products, insert into the new cart 
-    */
     if (list != null) {
       cart = JSON.parse(list);
     }
     
-    //create new Product with unique id
-    let newProduct: CartProduct = {
-      uid: generateId(),
-      id: product.id,
-      title: product.title,
-      price: product.price,
-      description: product.description,
-      category: product.category,
-      image: product.image
+    const product: CartProduct | undefined = cart.find(product => product.id === product_id);
+
+    if(!product){
+      const productData = await fetch(`https://dummyjson.com/products/${product_id}`)
+        .then(res => res.json())
+        .catch((err) => {throw err})
+      const newCartProduct = {
+        id: productData.id,
+        title: productData.title,
+        price: productData.price,
+        description: productData.description,
+        category: productData.category,
+        image: productData.thumbnail,
+        amount: 1
+      }
+      cart.push(newCartProduct);
+    }else{
+      product.amount += 1;
     }
-    
-    //inser new product into the cart
-    cart.push(newProduct);
+
     localStorage.setItem('cart', JSON.stringify(cart));
-    return;
 
   }catch(err){
     throw err;

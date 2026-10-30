@@ -5,7 +5,7 @@ import { auth } from '../../../services/firebaseConnection';
 import { handleFirebaseAuthErrors } from '../../../utils/handleFirebaseErrors'
 import '../auth.css';
 
-export default function Register() {
+export default function RegisterView() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

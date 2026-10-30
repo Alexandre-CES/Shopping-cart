@@ -5,7 +5,7 @@ import Header from '../../components/header/Header';
 import { Product } from '../../models/Product';
 import addToCart from '../../utils/addToCart';
 
-export default function Home() {
+export default function HomeView() {
   const [products, setProducts] = useState<Product[]>([]);
   const [message, setMessage] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
@@ -39,8 +39,9 @@ export default function Home() {
     
   }, []);
 
+  //call addToCart function and shows result at screen
   async function handleAdd(product: Product) {
-    await addToCart(product).then(()=>{
+    await addToCart(product.id).then(()=>{
       setMessage(`${product.title} Added to cart ✅`);
       setSuccess(true);
     }).catch((err)=>{
@@ -58,7 +59,7 @@ export default function Home() {
   }
 
   return (
-    <div className="container bg-dark" data-bs-theme="dark">
+    <div>
       <Header />
       <main>
 
@@ -72,10 +73,9 @@ export default function Home() {
         }
 
         {/* nav to cart */}
-        <section className="mt-5 text-center">
-          <Link to={"/cart"} className="btn btn-primary">
-            See cart
-          </Link>
+        <section className="mt-5 d-flex justify-content-center gap-5">
+          <Link to={"/cart"} className="btn btn-primary w-25">Cart</Link>
+          <Link to={"/orders"} className="btn btn-primary w-25">Orders</Link>
         </section>
 
         {/* Products */}
@@ -85,8 +85,8 @@ export default function Home() {
             {/* each card */}
             {products.map((product) => {
               return (
-                <div key={product.id} className="col-md-4 mb-4">
-                  <div className="card h-100">
+                <article key={product.id} className="col-md-4 mb-4">
+                  <div className="card h-100" data-bs-theme="dark">
                     <Link
                       to={"/product/" + product.id}
                       className="card-link"
@@ -110,7 +110,7 @@ export default function Home() {
                       </button>
                     </div>
                   </div>
-                </div>
+                </article>
               );
             })}
           

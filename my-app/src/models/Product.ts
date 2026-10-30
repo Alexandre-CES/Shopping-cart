@@ -1,5 +1,5 @@
-//Products we get using https://fakestoreapi.com/products
-export interface Product {
+
+export type Product = {
   id: number;
   title: string;
   price: number;
@@ -9,6 +9,6 @@ export interface Product {
 };
 
 //products to be inserted into cart
-export interface CartProduct extends Product{
-  uid: string;
+export type CartProduct = Product & {
+  amount: number;
 }
